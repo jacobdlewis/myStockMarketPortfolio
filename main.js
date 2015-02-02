@@ -23,14 +23,19 @@
       $($tempRow).append('<td>' + $stockQty + '</td>');
       $($tempRow).append('<td>' + data.Change.toFixed(2) + '</td>');
       $($tempRow).append('<td>' + data.ChangePercent.toFixed(2) + '</td>');
-      $($tempRow).append('<button id="RemoveRow">Remove</button>');
+      $($tempRow).append('<button class="RemoveRow">Remove</button>');
       $('table').append($tempRow);
       $('#tempTotal').remove();
       total += (data.LastPrice * $stockQty);
       $('#portfolioTotal').append('<p id="tempTotal">$' + total + '</p>');
     });
 
-    });
+   $('.RemoveRow').on('click', function(){
+    $(this).closest ('tr').remove ();
+   });
+
+
+  });
 
 
 
