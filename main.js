@@ -16,6 +16,7 @@
     $.getJSON(url, function(data) {
       AJAXresponse = data;
       console.log(data);
+      $('table').append(data.Name);
     });
 
     });
