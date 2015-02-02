@@ -16,7 +16,14 @@
     $.getJSON(url, function(data) {
       AJAXresponse = data;
       console.log(data);
-      $('table').append(data.Name);
+      var $tempRow = $('<tr></tr>');
+      $($tempRow).append('<td>' + data.Name + '</td>');
+      $($tempRow).append('<td>' + data.LastPrice + '</td>');
+      $($tempRow).append('<td>' + $stockQty + '</td>');
+      $($tempRow).append('<td>' + data.Change + '</td>');
+      $($tempRow).append('<td>' + data.ChangePercent + '</td>');
+      $($tempRow).append('<button id="RemoveRow">Remove</button>');
+      $('table').append($tempRow);
     });
 
     });
