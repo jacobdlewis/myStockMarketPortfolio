@@ -27,7 +27,7 @@
       $('table').append($tempRow);
       $('#tempTotal').remove();
       total += (data.LastPrice * $stockQty);
-      $('table').append('<p id="tempTotal">$' + total + '</p>');
+      $('#portfolioTotal').append('<p id="tempTotal">$' + total + '</p>');
     });
 
     });

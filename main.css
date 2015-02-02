@@ -1,0 +1,21 @@
+.stock_input{
+  width: 200px !important;
+}
+.wrapper{
+  margin: auto;
+  text-align: center;
+}
+.input_wrapper {
+  box-sizing: border-box;
+  margin-left: 45% !important;
+}
+
+#buyStocks {
+margin-left: -75% !important;
+}
+
+
+.table {
+  margin: auto;
+  text-align: center;
+}
