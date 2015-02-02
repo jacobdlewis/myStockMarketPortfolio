@@ -1,4 +1,6 @@
 /* global $: false*/
+(function(){
+  'use strict'
   var url,
       $stockName,
       $stockQty,
@@ -19,8 +21,8 @@
       console.log(data);
       var $tempRow = $('<tr></tr>');
       $($tempRow).append('<td>' + data.Name + '</td>');
-      $($tempRow).append('<td>' + data.LastPrice + '</td>');
-      $($tempRow).append('<td>' + $stockQty + '</td>');
+      $($tempRow).append('<td class = "price">' + data.LastPrice + '</td>');
+      $($tempRow).append('<td class = "qty">' + $stockQty + '</td>');
       $($tempRow).append('<td>' + data.Change.toFixed(2) + '</td>');
       $($tempRow).append('<td>' + data.ChangePercent.toFixed(2) + '</td>');
       $($tempRow).append('<button class="RemoveRow">Remove</button>');
@@ -30,15 +32,15 @@
       $('#portfolioTotal').append('<p id="tempTotal">$' + total + '</p>');
     });
 
-   $('.RemoveRow').on('click', function(){
-    $(this).closest ('tr').remove ();
-   });
+   $('.table').on('click', '.RemoveRow', function(){
+    $(this).closest('tr').remove();
+  });
 
 
   });
 
 
-
+})();
 
 
 
