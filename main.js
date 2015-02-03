@@ -17,8 +17,8 @@
 
     $.getJSON(url, function(data) {
       AJAXresponse = data;
-      console.log(data);
       var $tempRow = $('<tr></tr>');
+      $($tempRow).attr("data-symb", data.Symbol);
       $($tempRow).attr("data-name", data.Name);
       $($tempRow).attr("data-purchPrice", data.LastPrice);
       $($tempRow).attr("data-qty", $stockQty);
@@ -38,21 +38,35 @@
     });
 
   });
- $('.table').on('click', '.RemoveRow', function(){
+   $('.table').on('click', '.RemoveRow', function(){
     var rowPrice = $(this).closest('tr').attr('data-purchPrice');
-    console.log(rowPrice);
     var rowQty = $(this).closest('tr').attr('data-qty');
-    console.log(rowQty);
     var rowTotal = (rowPrice * rowQty);
-    console.log(total);
     total -= rowTotal;
     $('#tempTotal').remove();
     $('#portfolioTotal').append('<p id="tempTotal">$' + total.toFixed(2) + '</p>');
     $(this).closest('tr').remove();
-  });
+    });
 
-
+    $('.table').on('click', '#refreshPortfolio', function(){
+      var tableContents = $('tr');
+      tableContents.each(function(tr){
+      var stockToUpdate = $(this).attr("data-symb");
+      var url = 'http://dev.markitondemand.com/Api/v2/Quote/jsonp?symbol=' + stockToUpdate + '&callback=?';
+      $.getJSON(url, function(data){
+        var newPrice = data.LastPrice;
+        var currPriceList = $('td:nth-of-type(3)');
+        console.log(currPriceList);
+        _.forEach(currPriceList, function(price){
+          console.log(price);
+          price.innerHTML = newPrice;
+        })
+      })
+    });
+    });
 })();
 
+// var selector = 'tr[data-symb="' + data.Symbol + '"]';
+//        $(selector).each()
 
 
