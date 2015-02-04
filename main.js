@@ -26,7 +26,9 @@
       $($tempRow).attr("data-currPrice", data.LastPrice);
       $($tempRow).append('<td>' + data.Name + '</td>');
       $($tempRow).append('<td>' + data.LastPrice + '</td>');
-      $($tempRow).append('<td>' + data.LastPrice + '</td>');
+      var $currPrice = $('<td>' + data.LastPrice + '</td>');
+      $currPrice.attr("data-updateMe", data.Symbol);
+      $($tempRow).append($currPrice);
       $($tempRow).append('<td>' + $stockQty + '</td>');
       $($tempRow).append('<td>' + data.Change.toFixed(2) + '</td>');
       $($tempRow).append('<td>' + data.ChangePercent.toFixed(2) + '</td>');
@@ -55,11 +57,14 @@
       var url = 'http://dev.markitondemand.com/Api/v2/Quote/jsonp?symbol=' + stockToUpdate + '&callback=?';
       $.getJSON(url, function(data){
         var newPrice = data.LastPrice;
+        var rtrnSymb = data.Symbol;
         var currPriceList = $('td:nth-of-type(3)');
-        console.log(currPriceList);
         _.forEach(currPriceList, function(price){
-          console.log(price);
+          console.log("current attribute: ", $(price).attr("data-updateme"));
+          console.log(rtrnSymb);
+          if ($(price).attr("data-updateme") === rtrnSymb){
           price.innerHTML = newPrice;
+          }
         })
       })
     });
